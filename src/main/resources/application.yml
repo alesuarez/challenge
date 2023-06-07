@@ -1,0 +1,9 @@
+server.servlet.contextPath: /challenge
+resilience4j.ratelimiter:
+  instances:
+    calculatorService:
+      limit-for-period: 2
+      limit-refresh-period: 60s
+      timeout-duration: 0
+
+
