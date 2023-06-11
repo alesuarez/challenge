@@ -26,5 +26,4 @@ public class Record {
     private Double numberOne;
     private Double numberTwo;
     private Double percentageResponse;
-    private String serverStatusResponse;
 }

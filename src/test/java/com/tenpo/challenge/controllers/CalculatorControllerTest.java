@@ -13,8 +13,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
-@WebMvcTest(ChallengeController.class)
-public class ChallengeControllerTest {
+@WebMvcTest(CalculatorController.class)
+public class CalculatorControllerTest {
 
     @Autowired
     private MockMvc mvc;
