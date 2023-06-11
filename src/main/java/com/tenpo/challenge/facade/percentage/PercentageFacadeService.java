@@ -2,6 +2,7 @@ package com.tenpo.challenge.facade.percentage;
 
 import com.tenpo.challenge.exceptions.ProviderClientException;
 import com.tenpo.challenge.facade.percentage.response.PercentageResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
+@Slf4j
 public class PercentageFacadeService {
 
     private static final String PERCENTAGE_URI = "/percentage";
@@ -26,6 +28,7 @@ public class PercentageFacadeService {
 
     public double getPercentage(double sum) {
         try {
+            log.info("Getting percentage from provider.");
             ResponseEntity<PercentageResponse> response = restTemplate.exchange(
                     providerUrl + PERCENTAGE_URI + QUERY_STRING + sum ,
                     HttpMethod.GET,

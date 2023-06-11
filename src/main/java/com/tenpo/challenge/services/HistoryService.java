@@ -7,4 +7,6 @@ import org.springframework.data.domain.Pageable;
 public interface HistoryService {
     void save(Double numbOne, Double numbTwo, Double numResponse);
     Page<Record> getHistory(Pageable pageable);
+
+    Record getLastValue();
 }

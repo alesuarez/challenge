@@ -1,6 +1,7 @@
 package com.tenpo.challenge.services.history;
 
 import com.tenpo.challenge.domain.models.Record;
+import com.tenpo.challenge.exceptions.NotFoundValueException;
 import com.tenpo.challenge.repository.HistoryRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.Page;
@@ -11,8 +12,11 @@ import org.springframework.data.domain.Pageable;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
@@ -47,5 +51,30 @@ public class HistoryStorageServiceTest {
         assertThat(pages.getTotalPages()).isEqualTo(1);
         verify(historyRepositoryMock, times(1)).findAll(pageable);
 
+    }
+
+    @Test
+    public void getLastValue_successful() {
+        HistoryRepository historyRepositoryMock = mock(HistoryRepository.class);
+        HistoryStorageService historyStorageService = new HistoryStorageService(historyRepositoryMock);
+
+        when(historyRepositoryMock.getLastRecordInserted()).thenReturn(Optional.of(Record.builder().build()));
+
+        historyStorageService.getLastValue();
+
+        verify(historyRepositoryMock, times(1)).getLastRecordInserted();
+    }
+
+    @Test
+    public void getLastValue_whenTheDatabaseIsEmpty_shouldThrowNotFoundValueException() {
+        HistoryRepository historyRepositoryMock = mock(HistoryRepository.class);
+        HistoryStorageService historyStorageService = new HistoryStorageService(historyRepositoryMock);
+
+        when(historyRepositoryMock.getLastRecordInserted()).thenReturn(Optional.empty());
+
+        Exception exception = assertThrows(NotFoundValueException.class, () -> historyStorageService.getLastValue());
+
+        assertEquals("Cannot provide the value for this operation.", exception.getMessage());
+        verify(historyRepositoryMock, times(1)).getLastRecordInserted();
     }
 }

@@ -10,8 +10,8 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(CalculatorController.class)
 public class CalculatorControllerTest {
@@ -26,7 +26,7 @@ public class CalculatorControllerTest {
     public void getPercentage() throws Exception {
         when(calculatorService.percentage(123,321)).thenReturn(456.00);
 
-        mvc.perform(post("/percentage")
+        mvc.perform(post("/calculator/percentage")
             .contentType(MediaType.APPLICATION_JSON)
             .content("{\"valueOne\":123.0,\"valueTwo\":321.0}"))
                 .andExpect(status().isOk())
