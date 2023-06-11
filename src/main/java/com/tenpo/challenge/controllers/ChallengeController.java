@@ -1,5 +1,6 @@
 package com.tenpo.challenge.controllers;
 
+import com.tenpo.challenge.controllers.request.PercentageCalculatorRequest;
 import com.tenpo.challenge.controllers.responses.PercentageCalculatorResponse;
 import com.tenpo.challenge.exceptions.LimitRequestException;
 import com.tenpo.challenge.services.CalculatorService;

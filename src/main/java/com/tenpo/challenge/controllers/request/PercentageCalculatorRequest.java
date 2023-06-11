@@ -1,4 +1,4 @@
-package com.tenpo.challenge.controllers;
+package com.tenpo.challenge.controllers.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
