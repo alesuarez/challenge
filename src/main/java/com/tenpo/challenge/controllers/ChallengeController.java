@@ -2,7 +2,9 @@ package com.tenpo.challenge.controllers;
 
 import com.tenpo.challenge.domain.dtos.request.PercentageCalculatorRequest;
 import com.tenpo.challenge.domain.dtos.response.PercentageCalculatorResponse;
+import com.tenpo.challenge.exceptions.LimitRequestException;
 import com.tenpo.challenge.services.CalculatorService;
+import io.github.resilience4j.ratelimiter.RequestNotPermitted;
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -31,7 +33,7 @@ public class ChallengeController {
         return new ResponseEntity<>(percentageCalculatorResponse, HttpStatus.OK);
     }
 
-    public ResponseEntity<String> rateLimiterFallback(Exception e){
-        return new ResponseEntity<>("Percentage service does not permit further calls", HttpStatus.TOO_MANY_REQUESTS);
+    public ResponseEntity<String> rateLimiterFallback(RequestNotPermitted e){
+        throw new LimitRequestException();
     }
 }
