@@ -1,4 +1,4 @@
-package com.tenpo.challenge.domain.dtos.response;
+package com.tenpo.challenge.controllers.responses;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -6,10 +6,19 @@ resilience4j.ratelimiter:
       limit-refresh-period: 60s
       timeout-duration: 0
 
-logging:
-  level:
-    io:
-      github:
-        resilience4j: TRACE
 provider:
   url: https://api.mockfly.dev/mocks/6db02e4d-880e-4f21-8f13-2d7dfec11a3f
+
+spring:
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    generate-ddl: true
+  sql:
+    init:
+      platform: postgres
+  datasource:
+    url: jdbc:postgresql://localhost:5432/tenpo-challenge
+    username: postgres
+    password: secret
+    driver-class-name: org.postgresql.Driver

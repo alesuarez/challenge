@@ -1,7 +1,6 @@
 package com.tenpo.challenge.controllers;
 
-import com.tenpo.challenge.domain.dtos.request.PercentageCalculatorRequest;
-import com.tenpo.challenge.domain.dtos.response.PercentageCalculatorResponse;
+import com.tenpo.challenge.controllers.responses.PercentageCalculatorResponse;
 import com.tenpo.challenge.exceptions.LimitRequestException;
 import com.tenpo.challenge.services.CalculatorService;
 import io.github.resilience4j.ratelimiter.RequestNotPermitted;
