@@ -4,8 +4,10 @@ import com.tenpo.challenge.domain.models.Record;
 import com.tenpo.challenge.repository.HistoryRepository;
 import com.tenpo.challenge.services.HistoryService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 
@@ -13,12 +15,15 @@ import java.time.LocalDateTime;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class HistoryStorageService implements HistoryService {
 
     private final HistoryRepository historyRepository;
 
     @Override
+    @Async("saveHistory")
     public void save(Double numbOne, Double numbTwo, Double numResponse) {
+        log.info("Saving on database...");
         Record record = Record.builder()
                 .numberOne(numbOne)
                 .numberTwo(numbTwo)
