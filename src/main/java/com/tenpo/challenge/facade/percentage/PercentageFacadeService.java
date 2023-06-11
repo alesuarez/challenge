@@ -2,14 +2,19 @@ package com.tenpo.challenge.facade.percentage;
 
 import com.tenpo.challenge.exceptions.ProviderClientException;
 import com.tenpo.challenge.facade.percentage.response.PercentageResponse;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
 
 @Service
 @Slf4j
@@ -26,6 +31,9 @@ public class PercentageFacadeService {
         this.restTemplate = restTemplate;
     }
 
+
+
+    @Retryable(value = { Exception.class }, maxAttemptsExpression = "${retry.maxAttempts}", backoff = @Backoff(delayExpression = "${retry.delay}"))
     public double getPercentage(double sum) {
         try {
             log.info("Getting percentage from provider.");
@@ -38,5 +46,10 @@ public class PercentageFacadeService {
         } catch (Exception ex) {
             throw new ProviderClientException();
         }
+    }
+
+    private double obtainLastPercentageFromDatabase(double sum, Throwable t) {
+        log.error("Fail when getting availability report indicators from snowflake");
+        return 10.00;
     }
 }
