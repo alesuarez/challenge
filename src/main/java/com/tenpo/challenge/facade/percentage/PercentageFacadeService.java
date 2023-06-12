@@ -31,8 +31,6 @@ public class PercentageFacadeService {
         this.restTemplate = restTemplate;
     }
 
-
-
     @Retryable(value = { Exception.class }, maxAttemptsExpression = "${retry.maxAttempts}", backoff = @Backoff(delayExpression = "${retry.delay}"))
     public double getPercentage(double sum) {
         try {
@@ -46,10 +44,5 @@ public class PercentageFacadeService {
         } catch (Exception ex) {
             throw new ProviderClientException();
         }
-    }
-
-    private double obtainLastPercentageFromDatabase(double sum, Throwable t) {
-        log.error("Fail when getting availability report indicators from snowflake");
-        return 10.00;
     }
 }

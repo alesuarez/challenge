@@ -26,7 +26,7 @@ spring:
     init:
       platform: postgres
   datasource:
-    url: jdbc:postgresql://localhost:5432/tenpo-challenge
+    url: jdbc:postgresql://pgsql:5432/tenpo-challenge
     username: postgres
     password: secret
     driver-class-name: org.postgresql.Driver

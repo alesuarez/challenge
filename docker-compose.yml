@@ -1,0 +1,23 @@
+version: '3'
+services:
+  db:
+    container_name: pgsql
+    image: postgres:9.6
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: tenpo-challenge
+      PGDATA: /tmp
+  api:
+    container_name: api
+    image: spring-boot-api-img
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    ports:
+      - "8080:8080"
+    restart: always
