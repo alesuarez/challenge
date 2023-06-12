@@ -9,10 +9,8 @@ resilience4j:
   circuitbreaker:
     instances:
       percentageProvider:
-        slidingWindowSize: 50
-        waitDurationInOpenState: 60s
-        failureRateThreshold: 30
-        eventConsumerBufferSize: 100
+        waitDurationInOpenState: 1800s
+        minimumNumberOfCalls: 3
 
 provider:
   url: https://api.mockfly.dev/mocks/6db02e4d-880e-4f21-8f13-2d7dfec11a3f
