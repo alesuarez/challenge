@@ -2,7 +2,6 @@ package com.tenpo.challenge.facade.percentage;
 
 import com.tenpo.challenge.exceptions.ProviderClientException;
 import com.tenpo.challenge.facade.percentage.response.PercentageResponse;
-import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -13,8 +12,6 @@ import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.List;
 
 @Service
 @Slf4j

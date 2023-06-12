@@ -21,16 +21,16 @@ public class PercentageServiceTest {
         HistoryService historyServiceMock = mock(HistoryService.class);
         CalculatorService percentageService = new PercentageService(percentageFacadeServiceMock, historyServiceMock);
 
-        when(percentageFacadeServiceMock.getPercentage(30)).thenReturn(10.00);
+        when(percentageFacadeServiceMock.getPercentage(30.0)).thenReturn(10.0);
         doNothing().when(historyServiceMock).save(10.0, 20.0, 10.0);
 
-        final double percentage = percentageService.percentage(10, 20);
+        final double percentage = percentageService.percentage(10.0, 20.0);
 
         // @When
         // @Then
-        assertThat(percentage).isEqualTo(33);
+        assertThat(percentage).isEqualTo(33.0);
 
-        verify(percentageFacadeServiceMock, times(1)).getPercentage(30.);
+        verify(percentageFacadeServiceMock, times(1)).getPercentage(30.0);
         verify(historyServiceMock, times(1)).save(10.0, 20.0, 10.0);
     }
 }
